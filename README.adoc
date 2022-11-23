@@ -1,0 +1,26 @@
+= Serenity (3) for Spring Boot (2) using Cucumber
+
+This PoC is heavily based on the official https://github.com/serenity-bdd/serenity-cucumber-starter[Serenity BDD and Cucumber starter] combined with the https://serenity-bdd.github.io/docs/tutorials/cucumber-screenplay[Serenity Cucumber tutorial]
+and the https://serenity-bdd.github.io/docs/screenplay/screenplay_rest[Serenity Screenplay with RESP APIs tutorial].
+
+Under the hood, it's still using _RestAssured_ (so not Spring's `TestRestTemplate`) for calling the local Spring Boot endpoints (instead of using the remote API from the tutorial).
+
+Current stack:
+
+* Serenity BDD 3.4.2
+* Cucumber 7.8.1
+* RestAssured 5.3.0
+* Spring Boot 2.7.5
+* JUnit (Vintage) 5.8.2
+
+== Running the tests under Maven
+
+This project comes with just a Maven build script. To run the tests, open a command window and run:
+
+----
+mvn clean verify
+----
+
+== Viewing the reports
+
+The command provided above will produce a Serenity test report in the `target/site/serenity` directory. Go take a look!
