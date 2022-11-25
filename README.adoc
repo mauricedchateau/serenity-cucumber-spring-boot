@@ -30,7 +30,7 @@ The command provided above will produce a Serenity test report in the `target/si
 		groovy.lang.GroovyRuntimeException: Conflicting module versions.
 		Module [groovy-xml is loaded in version a.b.c and you are trying to load version x.y.z
 
-=== _Solution:_
+==== _Solution:_
 
 To resolve the version conflicts between RestAssured and Serenity, exclude the Groovy dependencies from
 the `net.serenity-bdd:serenity-screenplay-rest` dependency:
@@ -50,7 +50,7 @@ the `net.serenity-bdd:serenity-screenplay-rest` dependency:
 		io.restassured.internal.http.HTTPBuilder.parseResponse() is applicable for argument types:
 		(io.restassured.internal.http.HttpResponseDecorator, io.restassured.http.ContentType) values: [..., ...]
 
-=== _Solution:_
+==== _Solution:_
 
 Exclude the RestAssured dependency from the `net.serenity-bdd:serenity-screenplay-rest` dependency,
 and add an explicit RestAssured dependency to the POM with a compatible version:
@@ -84,7 +84,7 @@ The latest available version is a good place to start.
 
 		java.lang.NoClassDefFoundError: org/openqa/selenium/AcceptedW3CCapabilityKeys
 
-=== _Solution:_
+==== _Solution:_
 
 To resolve conflict between Serenity core and Spring Boot, add a compatible Selenium version to the POM:
 
