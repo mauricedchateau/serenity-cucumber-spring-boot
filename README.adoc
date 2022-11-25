@@ -3,14 +3,12 @@
 This PoC is heavily based on the official https://github.com/serenity-bdd/serenity-cucumber-starter[Serenity BDD and Cucumber starter] combined with the https://serenity-bdd.github.io/docs/tutorials/cucumber-screenplay[Serenity Cucumber tutorial]
 and the https://serenity-bdd.github.io/docs/screenplay/screenplay_rest[Serenity Screenplay with RESP APIs tutorial].
 
-Under the hood, it's still using _RestAssured_ (so not Spring's `TestRestTemplate`) for calling the local Spring Boot endpoints (instead of using the remote API from the tutorial).
-
 Current stack:
 
 * Serenity BDD 3.4.2
 * Cucumber 7.8.1
 * RestAssured 5.3.0
-* Spring Boot 2.7.5
+* Spring Boot 2.7.6
 * JUnit (Vintage) 5.8.2
 
 == Running the tests under Maven
@@ -24,3 +22,72 @@ mvn clean verify
 == Viewing the reports
 
 The command provided above will produce a Serenity test report in the `target/site/serenity` directory. Go take a look!
+
+== Some problems encountered during the development of this configuration
+
+=== _Problem:_
+
+		groovy.lang.GroovyRuntimeException: Conflicting module versions.
+		Module [groovy-xml is loaded in version a.b.c and you are trying to load version x.y.z
+
+=== _Solution:_
+
+To resolve the version conflicts between RestAssured and Serenity, exclude the Groovy dependencies from
+the `net.serenity-bdd:serenity-rest-assured` dependency:
+
+            <exclusion>
+                <groupId>org.apache.groovy</groupId>
+                <artifactId>groovy</artifactId>
+            </exclusion>
+            <exclusion>
+                <groupId>org.apache.groovy</groupId>
+                <artifactId>groovy-xml</artifactId>
+            </exclusion>
+
+=== _Problem:_
+
+		groovy.lang.MissingMethodException: No signature of method:
+		io.restassured.internal.http.HTTPBuilder.parseResponse() is applicable for argument types:
+		(io.restassured.internal.http.HttpResponseDecorator, io.restassured.http.ContentType) values: [..., ...]
+
+=== _Solution:_
+
+Exclude the RestAssured dependency from the `net.serenity-bdd:serenity-rest-assured` dependency,
+and add an explicit RestAssured dependency to the POM with a compatible version:
+
+            <exclusion>
+                <groupId>io.rest-assured</groupId>
+                <artifactId>rest-assured</artifactId>
+            </exclusion>
+        [...]
+            <dependency>
+                <!-- To force a compatible version of Rest Assured: -->
+                <groupId>io.rest-assured</groupId>
+                <artifactId>rest-assured</artifactId>
+                <version>5.3.0</version>
+                <exclusions>
+                    <!-- To resolve the version conflict between RestAssured and Serenity: -->
+                    <exclusion>
+                        <groupId>org.apache.groovy</groupId>
+                        <artifactId>groovy</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.groovy</groupId>
+                        <artifactId>groovy-xml</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+The latest available version is a good place to start.
+
+=== _Problem:_
+
+		java.lang.NoClassDefFoundError: org/openqa/selenium/AcceptedW3CCapabilityKeys
+
+=== _Solution:_
+
+To resolve conflict between Serenity core and Spring Boot, add a compatible Selenium version to the POM:
+
+        <selenium.version>4.6.0</selenium.version>
+
+And here as well: the latest available version is a good place to start.

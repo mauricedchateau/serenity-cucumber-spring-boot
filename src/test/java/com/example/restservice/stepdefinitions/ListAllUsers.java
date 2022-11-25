@@ -2,11 +2,9 @@ package com.example.restservice.stepdefinitions;
 
 import io.cucumber.java.en.*;
 import lombok.extern.slf4j.Slf4j;
-import net.serenitybdd.junit.spring.integration.SpringIntegrationMethodRule;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.rest.abilities.CallAnApi;
 import net.serenitybdd.screenplay.rest.interactions.Get;
-import org.junit.Rule;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 
@@ -16,9 +14,6 @@ import static org.hamcrest.CoreMatchers.equalTo;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Slf4j
 public class ListAllUsers {
-
-    @Rule
-    public SpringIntegrationMethodRule springIntegrationMethodRule = new SpringIntegrationMethodRule();
 
     @LocalServerPort
     private int port;
