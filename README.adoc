@@ -1,7 +1,7 @@
 = Serenity (3) for Spring Boot (2) using Cucumber
 
 This PoC is heavily based on the official https://github.com/serenity-bdd/serenity-cucumber-starter[Serenity BDD and Cucumber starter] combined with the https://serenity-bdd.github.io/docs/tutorials/cucumber-screenplay[Serenity Cucumber tutorial]
-and the https://serenity-bdd.github.io/docs/screenplay/screenplay_rest[Serenity Screenplay with RESP APIs tutorial].
+and the https://serenity-bdd.github.io/docs/screenplay/screenplay_rest[Serenity Screenplay with REST APIs tutorial].
 
 Current stack:
 
@@ -33,7 +33,7 @@ The command provided above will produce a Serenity test report in the `target/si
 === _Solution:_
 
 To resolve the version conflicts between RestAssured and Serenity, exclude the Groovy dependencies from
-the `net.serenity-bdd:serenity-rest-assured` dependency:
+the `net.serenity-bdd:serenity-screenplay-rest` dependency:
 
             <exclusion>
                 <groupId>org.apache.groovy</groupId>
@@ -52,7 +52,7 @@ the `net.serenity-bdd:serenity-rest-assured` dependency:
 
 === _Solution:_
 
-Exclude the RestAssured dependency from the `net.serenity-bdd:serenity-rest-assured` dependency,
+Exclude the RestAssured dependency from the `net.serenity-bdd:serenity-screenplay-rest` dependency,
 and add an explicit RestAssured dependency to the POM with a compatible version:
 
             <exclusion>
