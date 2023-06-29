@@ -1,0 +1,44 @@
+name: Pull Request Build
+
+on:
+  pull_request_target:
+    branches:
+      - master
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Test and Analyze
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: read
+      checks: write
+      pull-requests: write
+      pages: write
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+      - name: Set up JDK 20
+        uses: actions/setup-java@v3
+        with:
+          java-version: 20
+          distribution: 'temurin'
+          cache: 'maven'
+      - name: Cache local Maven repository
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+      - name: Build with Maven
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_READ_TOKEN }}
+        run: mvn verify

@@ -18,7 +18,7 @@
     <name>Sample Serenity BDD project using Cucumber on Spring Boot</name>
 
     <properties>
-        <java.version>19</java.version>
+        <java.version>20</java.version>
 
         <serenity.version>3.8.1</serenity.version>
 
