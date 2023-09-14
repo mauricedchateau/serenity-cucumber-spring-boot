@@ -20,7 +20,7 @@
     <properties>
         <java.version>20</java.version>
 
-        <serenity.version>3.8.1</serenity.version>
+        <serenity.version>4.0.5</serenity.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <encoding>UTF-8</encoding>
