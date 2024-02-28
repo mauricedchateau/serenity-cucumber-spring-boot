@@ -1,11 +1,11 @@
-= Serenity (3) for Spring Boot (3) using Cucumber
+= Serenity (4) for Spring Boot (3) using Cucumber
 
 This PoC is heavily based on the official https://github.com/serenity-bdd/serenity-cucumber-starter[Serenity BDD and Cucumber starter] combined with the https://serenity-bdd.github.io/docs/tutorials/cucumber-screenplay[Serenity Cucumber tutorial]
 and the https://serenity-bdd.github.io/docs/screenplay/screenplay_rest[Serenity Screenplay with REST APIs tutorial].
 
 Current stack:
 
-* Serenity BDD 3
+* Serenity BDD 4
 ** Cucumber 7
 ** RestAssured 5
 * Spring Boot 3
